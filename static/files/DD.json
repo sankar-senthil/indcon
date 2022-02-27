@@ -1,0 +1,58 @@
+{"addon":{
+    "IGR": 7,
+    "KDR": 2,
+    "PDR": 8,
+    "FPR": 7,
+    "AFR": 3,
+    "CAR": 5,
+    "MWR": 6,
+    "IGS": 0,
+    "KDS": 0,
+    "PDS": 0,
+    "FPS": 0,
+    "AFS": 0,
+    "CAS": 0,
+    "MWS": 0,
+    "IGC": 0,
+    "KDC": 0,
+    "PDC": 0,
+    "FPC": 0,
+    "AFC": 0,
+    "CAC": 0,
+    "MWC": 0
+},
+"ded":{
+    "SSN":"***_**-1925",
+    "TS":"single",
+    "EX":1,
+    "Ref":0,
+    "SO":0,
+    "Cp":0,
+    "CTR":0.015,
+    "CTA":0,
+    "STR":0.133,
+    "STA":0,
+    "HSR":0,
+    "HSD":0,
+    "HSC":0,
+    "CRR":0,
+    "CRD":0,
+    "CRC":0,
+    "VWA":0,
+    "VWpct":0,
+    "VWcre":0,
+    "VWba":0,
+    "CKA":0,
+    "CKpct":0,
+    "CKcre":0,
+    "CKba":0,
+    "CLA":0,
+    "CLpct":0,
+    "CLcre":0,
+    "CLba":0
+    
+
+
+}
+}
+

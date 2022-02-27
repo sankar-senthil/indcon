@@ -1,0 +1,308 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InCon-home</title>
+    <link rel = "icon" href="{% static "images/logo.png" %}" type = "image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles\main.css' %}">
+    <link rel="stylesheet" href="{% static 'styles\print.css' %}">
+    <script src="{% static 'js/home.js' %}"></script>
+</head>
+<body>
+    <script src="{% static 'js/home.js' %}"></script>
+    <div class="container" style="margin-top: 4%;">
+            <div class="row" >
+                <div class="col-1">
+                    <img src="{% static 'images\logo.png' %}" alt="" style="width: 140%;height: 100%;margin-left: -20%;">
+                </div>
+                <div class="col-sm">
+                    <div class = "row">
+                        <h6>CRO$$ MART MARKETING
+                        </h6>
+                    </div>
+                    <div class = "row">
+                        <h6>6929 N. Hayden Rd Ste 507
+                        </h6>
+                    </div> 
+                    <div class = "row">
+                        <h6>Scottsdale AZ 85250
+                        </h6>
+                    </div>   
+                </div>
+                <div class="col-5" style="margin-right:-5%;">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="">Period Ending : </label>
+                        </div>
+                        <div class="col">
+                            <input type="date"  name ="RP1" class="form-control" style="width: 65%;">
+                        </div>
+                    
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="">Pay Date : </label>
+                        </div>
+                        <div class="col">
+                            <input type="date"  name ="RP1" class="form-control" style="width: 65%;">   
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class = "col-7" id="left_" style="margin-top: 2%;">
+                    <div class="row">
+                        <div class = "col-4.1">
+                            <table class="table">
+                                <thead style="text-align: center;">
+                                    <tr>
+                                        <th class="col">Earnings</th>
+                                        <th class="col">Rate</th>
+                                        <th class="col">Signature</th>
+                                        <th class="col">Current</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Ind'n Gaming</td>
+                                        <td><input type="number" id="IGR" value= {{ addon.IGR }}  onkeyup="calcul()" ></td>
+                                        <td><input type="number" id="IGS" value={{ addon.IGS }}  onkeyup="calcul()"></td>
+                                        <td><input type="number" id="IGC" value={{ addon.IGC }}  onkeyup="calcul()"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kidney Dialysis</td>
+                                        <td><input type="number" id="KDR" value={{ addon.KDR }} onkeyup="calcul()"></td>
+                                        <td><input type="number" id="KDS" value={{ addon.KDS }} onkeyup="calcul()"></td>
+                                        <td><input type="number" id="KDC" value={{ addon.KDC }} onkeyup="calcul()"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pandemic</td>
+                                        <td><input type="number" id="PDR" value={{ addon.PDR }} onkeyup="calcul()"></td>
+                                        <td><input type="number" id="PDS" value={{ addon.PDS }} onkeyup="calcul()"></td>
+                                        <td><input type="number" id="PDC" value={{ addon.PDC }} onkeyup="calcul()"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fair Pay</td>
+                                        <td><input type="number" id="FPR" value={{ addon.FPR }} onkeyup="calcul()"></td>
+                                        <td><input type="number" id="FPS" value={{ addon.FPS }} onkeyup="calcul()"></td>
+                                        <td><input type="number" id="FPC" value={{ addon.FPC }} onkeyup="calcul()"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arts & Funding</td>
+                                        <td><input type="number" id="AFR" value={{ addon.AFR }} onkeyup="calcul()"></td>
+                                        <td><input type="number" id="AFS" value={{ addon.AFS }} onkeyup="calcul()"></td>
+                                        <td><input type="number" id="AFC" value={{ addon.AFC }} onkeyup="calcul()"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Clean Air</td>
+                                        <td><input type="number" id="CAR" value={{ addon.CAR }} onkeyup="calcul()"></td>
+                                        <td><input type="number" id="CAS" value={{ addon.CAS }} onkeyup="calcul()"></td>
+                                        <td><input type="number" id="CAC" value={{ addon.CAC }} onkeyup="calcul()"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Minimum Wage</td>
+                                        <td><input type="number" id="MWR" value={{ addon.MWR }} onkeyup="calcul()"></td>
+                                        <td><input type="number" id="MWS" value={{ addon.MWS }} onkeyup="calcul()"></td>
+                                        <td><input type="number" id="MWC" value={{ addon.MWC }} onkeyup="calcul()"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4.1">
+                            <table class="table" >
+                                <thead>
+                                    <th>BONUSES</th>
+                                    <th>Amount</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Referral</td>
+                                        <td><input type="number" id="Ref" value={{ ded.Ref }} onkeyup="calcul()"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sign-On</td>
+                                        <td><input type="number" id="SO" value={{ ded.SO }} onkeyup="calcul()"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Campaign </td>
+                                        <td><input type="number" id="Cp" value={{ ded.Cp }} onkeyup="calcul()"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <h3>Deductions</h3>
+                    <hr>
+                    <div class="row">
+                        <div class="col-4.1">
+                            <table class="table"> 
+                                <thead>
+                                    <th>Tax</th>
+                                    <th>Tax Rate</th>
+                                    <th>Amount</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Local/CITY TAX W/H</td>
+                                        <td><input type="number" id="CTR" value="{{ ded.CTR }}" onkeyup="calcul()"></td>
+                                        <td><input type="number" id="CTA" value="{{ ded.CTA }}" onkeyup="calcul()"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>STATE TAX W/H</td>
+                                        <td><input type="number" id="STR" value="{{ ded.STR }}" onkeyup="calcul()"></td>
+                                        <td><input type="number" id="STA" value="{{ ded.STA }}" onkeyup="calcul()"></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        
+
+                    </div>
+                    <div class="row">
+                            
+                            <div class="col-4.1">
+                                <table class="table">
+                                    <thead>
+                                        <th>Other</th>
+                                        <th>Rate</th>
+                                        <th>days</th>
+                                        <th>Current</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Hotel Stays</td>
+                                            <td><input type="number" id="HSR" value="{{ ded.HSR }}" onkeyup="calcul()"></td>
+                                            <td><input type="number" id="HSD" value="{{ ded.HSD }}" onkeyup="calcul()"></td>
+                                            <td><input type="number" id="HSC" value="{{ ded.HSC }}" onkeyup="calcul()"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Car Rental</td>
+                                            <td><input type="number" id="CRR" value="{{ ded.CRR }}" onkeyup="calcul()"></td>
+                                            <td><input type="number" id="CRD" value="{{ ded.CRD }}" onkeyup="calcul()"></td>
+                                            <td><input type="number" id="CRC" value="{{ ded.CRC }}" onkeyup="calcul()"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                    </div>
+                    <div class="row">
+                        <table class="table">
+                            <thead>
+                                <th></th>
+                                <th>Amount</th>
+                                <th>Pct W/H</th>
+                                <th>Credit</th>
+                                <th>Balance</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Volunteer Work </td>
+                                    <td><input type="number" id="VWA" value="{{ ded.VWA }}" onkeyup="calcul()"></td>
+                                    <td><input type="number" id="VWpct" value="{{ ded.VWpct }}" onkeyup="calcul()"></td>
+                                    <td><input type="number" id="VWcre" value="{{ ded.VWcre }}" onkeyup="calcul()"></td>
+                                    <td><input type="number" id="VWba" value="{{ ded.VWba }}" onkeyup="calcul()"></td>
+                                </tr>
+                                <tr>
+                                    <td>Chargeback Kitty</td>
+                                    <td><input type="number" id="CKA" value="{{ ded.CKA }}" onkeyup="calcul()"></td>
+                                    <td><input type="number" id="CKpct" value="{{ ded.CKpct }}" onkeyup="calcul()"></td>
+                                    <td><input type="number" id="CKcre" value="{{ ded.CKcre }}" onkeyup="calcul()"></td>
+                                    <td><input type="number" id="CKba" value="{{ ded.CKba }}" onkeyup="calcul()"></td>
+                                </tr>
+                                <tr>
+                                    <td>Company Loan Advances</td>
+                                    <td><input type="number" id="CLA" value="{{ ded.CLA }}" onkeyup="calcul()"></td>
+                                    <td><input type="number" id="CLpct" value="{{ ded.CLpct }}" onkeyup="calcul()"></td>
+                                    <td><input type="number" id="CLcre" value="{{ ded.CLcre }}" onkeyup="calcul()"></td>
+                                    <td><input type="number" id="CLba" value="{{ ded.CLba }}" onkeyup="calcul()"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>     
+                </div>   
+                <div class="col" id="right_column">
+                    
+                    <br>
+
+                    <div id="label">
+                        <div class = "row" >
+                            <h5>Damon D Cross</h5>
+                        </div>
+                        <div class = "row">
+                            <h5>705 S Bentley St</h5>
+                        </div> 
+                        <div class = "row">
+                            <h5>Marion IL 62959</h5>
+                        </div>   
+                </div>
+
+                    
+                    <br><br><br><br><br><br><br><br>
+                    <div class = "row">
+                        <div class="col">
+                            <h6>Social Security Number:</h6>
+                        </div>
+                        <div class="col">
+                            <td><input type="text" value="{{ ded.SSN }}"></td>
+                        </div>
+                    </div>
+                    <div class = "row">
+                        <div class="col">
+                            <h6>Taxable Status:&nbsp;</h6>
+                        </div>
+                        <div class="col">
+                            <td><input type="text" value="{{ ded.TS }}"></td>
+                        </div>
+                        
+                        
+                    </div> 
+                    <div class = "row">
+                        <div class="col">
+                            <h6>Exemptions:&nbsp;</h6>
+                        </div>
+                        <div class="col">
+                            <td><input type="text" value="{{ ded.EX }}"></td>
+                        </div>
+                    </div>   
+                    
+                    <br><br>
+                    <div id="pay">
+                        <div class="row">
+                            <div class="col-3.8" style="text-align: left;">
+                                <h6> &nbsp;&nbsp; Gross Pay:</h6>
+                            </div>
+                            <div class="col">
+                                <h2 id="Grspy">$ 00</h2>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row"> 
+                            <div class="col-3.8" style="text-align: center;">
+                                <h6>&nbsp;&nbsp;&nbsp;Net Pay:&nbsp;&nbsp;&nbsp;</h6>
+                            </div>
+                            <div class="col">
+                                <h2 id="ntpy">$ 00</h2>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                </div>   
+            </div>
+        
+    </div>
+</body>
+</html>

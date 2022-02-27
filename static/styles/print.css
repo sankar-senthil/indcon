@@ -1,0 +1,16 @@
+@media print{
+    input{
+        border: 0;
+    }
+    #right_column{
+        font-size: 80%;
+    }
+    input[type="date"]{
+        /* display: none; */
+        border: 0;
+        margin-top: -2%;
+    }
+    #pay{
+        border: 2px solid black;
+    }
+}

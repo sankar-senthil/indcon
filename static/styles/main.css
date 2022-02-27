@@ -1,0 +1,23 @@
+#left_{
+font-size: 80%;
+}
+#label{
+    margin-left: 15%;
+}
+input{
+    width: 100px;
+    text-align: center;
+}
+th{
+    height: 70%;
+    text-align: center;
+}
+.container{
+    box-shadow: 0 0 5px 5px gray;
+}
+#pay{
+    box-shadow: 0 0 5px 5px gray;
+    width:90%;
+    /* margin-left: 50%; */
+    padding: 2%;
+}
