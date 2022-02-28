@@ -37,9 +37,8 @@ def dashboard(requests):
                 if len(value) and i != 'csrfmiddlewaretoken':
                     ColumnName+= f'{i},' 
 
-                    value[-1] = value[-1].capitalize() if i=='Date' else value[-1]
                     value[-1] = value[-1].lower() if type(value[-1]) == str and i!='Date' else value[-1]
-
+                    value[-1] = value[-1].capitalize() if i=='Day' else value[-1]
 
                     print(value[-1])
                     Filter+=f'{i} = "{value[-1]}" and ' if len(value) == 2 else ''
