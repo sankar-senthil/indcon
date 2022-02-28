@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+{% load static %}   
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles\dash-board.css' %}">
+<center><h3 class="display-4" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">MENU</h3></center>
+<div class="container">
+    <div class="jumbotron">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table class="table" id="check-box-row">
+                <tbody>
+                {% for i in names %} 
+                    <tr>
+                        {% for j in i %}
+                            <td data-toggle="tooltip" data-placement="down" title="{{ j }}">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value='{{ j }}' name='{{ j }}' >
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ j }}
+                                    </label>
+                                    <div class="form-group">
+                                        <input type="input" class="form-control" name="{{ j }}" placeholder="Filter">
+                                    </div>
+                                  </div>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <div class="order_by">
+                <h4>Order By</h4>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Record" id="flexRadioDefault1" value = 'Top'>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Top Record
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Record" id="flexRadioDefault2" checked value = 'Bottom'>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Bottom record
+                    </label>
+                  </div>
+
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" style="margin-left: 45%;margin-top: 3%;">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
