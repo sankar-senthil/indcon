@@ -3,7 +3,7 @@
         border: 0;
     }
     #right_column{
-        font-size: 80%;
+        font-size: 60%;
     }
     input[type="date"]{
         /* display: none; */
@@ -13,4 +13,5 @@
     #pay{
         border: 2px solid black;
     }
+  
 }
