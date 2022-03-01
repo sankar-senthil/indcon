@@ -1,4 +1,4 @@
-import sqlite3 as sq
+import sqlite3 as sq, os
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -54,7 +54,7 @@ def dashboard(requests):
                 Title[i] = i.upper()
 
         Filter = f" where {Filter[:-5]}" if Filter else ''
-        selectquery = open(r'static\files\selectquery.txt','r').read()
+        selectquery = open(f"{os.getcwd()}/static/files/selectquery.txt",'r').read()
         print(selectquery.replace('columns',ColumnName)+ Filter + " ORDER by " + order_by )
         selectdata = cursor.execute(selectquery.replace('columns',ColumnName)+ Filter + " ORDER by " + order_by).fetchall()
         context = {"ColumnName":ColumnName.split(','),'selectdata':selectdata,'Title':Title}
