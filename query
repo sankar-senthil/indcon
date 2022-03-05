@@ -115,7 +115,7 @@ FROM   (
 
 ORDER by Cast(substr(Top_Record, 0,instr(Top_Record, '-'))AS DECIMAL), Cast(substr(Top_Record, 3,instr(Top_Record, '-'))AS DECIMAL)
 
-ORDER by Cast(substr(bottom_record, 0,instr(bottom_record, '-'))AS DECIMAL), Cast(substr(bottom_record, 3,instr(bottom_record, '-'))AS DECIMAL)
+ORDER by Cast(substr(bottom_record, 0,instr(bottom_record, '-'))AS DECIMAL), Cast(substr(bottom_record, 3,instr(bottom_record, '-')) AS DECIMAL)
 
 
 

@@ -1,20 +1,20 @@
 import sqlite3 as sq, os
 from django.shortcuts import render, redirect
+from threading import Thread
+from . import scrapy
 
 # Create your views here.
 
 global ColumnName, Filter
 
 
+# Thread(target=scrapy.scraper_func).start()
     
 def dashboard(requests):
-    connection = sq.connect("basketball.db")  # connect to your DB
+    connection = sq.connect(r"C:\Users\Sankar Senthil\Documents\Daemon\ICONT\InCont\basketball.db")  # connect to your DB
     cursor = connection.cursor()
     data=cursor.execute('''SELECT * FROM s20_21 WHERE ID=1''')
     data = [ column[0] for column in data.description ]
-
-   
-
     global ColumnName, Filter
     ColumnName = ''
     Filter = ''
@@ -50,18 +50,10 @@ def dashboard(requests):
                         else:
                             
                             if len(value) == 2:
-                                Filter+=f"substr({i}, 0, instr({i}, '-')) = '{value[-1]}' and "
+                                if value[-1]:
+                                    Filter+=f"substr({i}, 0, instr({i}, '-')) = '{value[-1]}' and "
                             else:
-                                # Filter+=f"substr({i}, instr({i}, '-')+1) = '{}' and "
-                            # else:
-                            #     Filter+=''
-
                                 pass
-
-                        # Filter+=f'{i} = "{value[-2]}-{value[-1]}" and ' if len(value) == 3 and value[-1] else ''
-
-
-
                     else:
                         Filter+=f'{i} = "{value[-1]}" and ' if len(value) == 2 and value[-1] else ''
 
@@ -77,9 +69,10 @@ def dashboard(requests):
 
         Filter = f" where {Filter[:-5]}" if Filter else ''
         print("Filter",Filter)
-        selectquery = open(f"{os.getcwd()}/static/files/selectquery.txt",'r').read()
+        selectquery = open(r"C:\Users\Sankar Senthil\Documents\Daemon\ICONT\InCont\static\files\selectquery.txt",'r').read()
         print(selectquery.replace('columns',ColumnName)+ Filter + " order by Cast(date AS Date) DESC;" )
         selectdata = cursor.execute(selectquery.replace('columns',ColumnName) + Filter + " order by substr(date,7)||substr(date,1,2)||substr(date,4,2) DESC;").fetchall()
+        print(selectdata)
         context = {"ColumnName":ColumnName.split(','),'selectdata':selectdata,'Title':Title}
         
         # print(ColumnName)

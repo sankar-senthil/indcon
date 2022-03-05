@@ -14,6 +14,7 @@ class Scrapper:
         self.main_domain = "https://www.sports-reference.com"
         self.headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
         self.strdate = ''
+        self.day, self.wday = '',''
  
     def main_page(self, m, d, y):
         self.strdate = f"{y}-{m}-{d}"
@@ -59,7 +60,7 @@ class Scrapper:
                 # print(wday, fdate, top, tr, trd, rdd, tsteak, sd, tlw, w8dd, w8c)
 
                 # if tPGm >= 15 and bPGm >= 15:
-                con = sq.connect(r"C:\Users\Sankar Senthil\Documents\Daemon\ICONT\InCont\basketball.db")
+                con = sq.connect(r"C:\Users\Sankar Senthil\Documents\Daemon\DB_conv\basketball.db")
                 cursor = con.cursor()
                 
                 cursor.execute(
@@ -92,12 +93,12 @@ class Scrapper:
                         Top_Record_Difference ,
                         Bottom_Record_Difference 
                     )values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)                        """,
-                    (wday, fdate, top, tGL, t1, t2, tpts, bottom, BGL, b1, b2, bpts, tr, tlw, blw, br, w8c, rdd,sd ,tsteak, bsteak, w8dd, tPGm,  bPGm, trd,  brd)
+                    (self.wday, fdate, top, tGL, t1, t2, tpts, bottom, BGL, b1, b2, bpts, tr, tlw, blw, br, w8c, rdd,sd ,tsteak, bsteak, w8dd, tPGm,  bPGm, trd,  brd)
                 )
                 print("Worked - 1")
                 con.commit()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
                 con.close()
-                print(wday, fdate, top, tGL, t1, t2, tpts, bottom, BGL, b1, b2, bpts, tr, tlw, blw, br, w8c, rdd,sd ,tsteak, bsteak, w8dd, tPGm,  bPGm, trd,  brd)
+                print(self.wday, fdate, top, tGL, t1, t2, tpts, bottom, BGL, b1, b2, bpts, tr, tlw, blw, br, w8c, rdd,sd ,tsteak, bsteak, w8dd, tPGm,  bPGm, trd,  brd)
                 # else:pass
             except Exception:
                 print(Exception)
@@ -141,7 +142,7 @@ class Scrapper:
                     game_location = tdrow.find('td',{'data-stat':'game_location'}).text
                     date = tdrow.find('td',{'data-stat':'date_game'})
                     date = str(date).split('=')[2].split(' ')[0][1:-1]
-                    if date == day:
+                    if date == self.day:
                         break
                     else:pass
                     wins = tdrow.find('td',{'data-stat':'wins'}).text
@@ -160,17 +161,17 @@ class Scrapper:
             wldet = wldet[::-1][:8]
             return (wl, rd, Gsteak, wldet, pts, PGm, game_location)
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     
-    start_date = date(2022, 2, 11) 
-    end_date = date(2022, 3, 6)    
-    delta = end_date - start_date   
-    scrap = Scrapper()
-    for i in range(delta.days + 1):
-        day = start_date + timedelta(days=i)
-        wday = calendar.day_name[day.weekday()][:3]
-        day = str(day)
-        y, m, d = day.split('-')
-        scrap.main_page(m, d, y)
-        print(day)
-        print("*"*150)
+    # start_date = date(2022, 2, 11) 
+    # end_date = date(2022, 3, 6)    
+    # delta = end_date - start_date   
+    # scrap = se.Scrapper()
+    # for i in range(delta.days + 1):
+    #     day = start_date + timedelta(days=i)
+    #     scrap.wday = calendar.day_name[day.weekday()][:3]
+    #     scrap.day = str(day)
+    #     y, m, d = scrap.day.split('-')
+    #     scrap.main_page(m, d, y)
+    #     print(day)
+    #     print("*"*150)
