@@ -1,0 +1,52 @@
+
+SELECT columns
+
+FROM   (
+       SELECT *
+        FROM   s13_14
+        WHERE  Cast(top_number_of_previous_games_played AS DECIMAL) >= 10
+               AND Cast(bottom_number_of_previous_games_played AS DECIMAL) >= 10
+        UNION
+       SELECT *
+        FROM   s14_15
+        WHERE  Cast(top_number_of_previous_games_played AS DECIMAL) >= 10
+               AND Cast(bottom_number_of_previous_games_played AS DECIMAL) >= 10
+        UNION
+        SELECT *
+        FROM   s15_16
+        WHERE  Cast(top_number_of_previous_games_played AS DECIMAL) >= 10
+               AND Cast(bottom_number_of_previous_games_played AS DECIMAL) >= 10
+        UNION
+       
+       SELECT *
+        FROM   s16_17
+        WHERE  Cast(top_number_of_previous_games_played AS DECIMAL) >= 10
+               AND Cast(bottom_number_of_previous_games_played AS DECIMAL) >= 10
+        UNION
+        SELECT *
+        FROM   s17_18
+        WHERE  Cast(top_number_of_previous_games_played AS DECIMAL) >= 10
+               AND Cast(bottom_number_of_previous_games_played AS DECIMAL) >= 10
+        UNION
+        SELECT *
+        FROM   s18_19
+        WHERE  Cast(top_number_of_previous_games_played AS DECIMAL) >= 10
+               AND Cast(bottom_number_of_previous_games_played AS DECIMAL) >= 10
+        UNION
+        SELECT *
+        FROM   s19_20
+        WHERE  Cast(top_number_of_previous_games_played AS DECIMAL) >= 10
+               AND Cast(bottom_number_of_previous_games_played AS DECIMAL) >= 10
+        UNION
+        SELECT *
+        FROM   s20_21
+        WHERE  Cast(top_number_of_previous_games_played AS DECIMAL) >= 10
+               AND Cast(bottom_number_of_previous_games_played AS DECIMAL) >= 10
+        UNION
+        SELECT *
+        FROM   s21_22
+        WHERE  Cast(top_number_of_previous_games_played AS DECIMAL) >= 10
+               AND Cast(bottom_number_of_previous_games_played AS DECIMAL) >= 10
+       )A 
+
+ORDER by 

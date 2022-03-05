@@ -1,4 +1,4 @@
-import sqlite3 as sq, os
+import sqlite3 as sq, os, pandas as pd
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -26,13 +26,14 @@ def dashboard(requests):
     context = {'names':names}
     if requests.method == 'POST':
         Ddata = dict(requests.POST)
+        print(Ddata)
         for i in Ddata:
             value = Ddata[i]
             try:
                 value.remove('')
             except:pass
             if i == 'Record':
-                order_by = 'twins,twins' if value[0] == 'Top' else 'bwins, bloss'
+                order_by = 'Top_Record' if value[0] == 'Top_Record' else 'Bottom_Record'
             else:
                 if len(value) and i != 'csrfmiddlewaretoken':
                     ColumnName+= f'{i},' 
@@ -41,7 +42,10 @@ def dashboard(requests):
                     value[-1] = value[-1].capitalize() if i=='Day' else value[-1]
 
                     print(value[-1])
-                    Filter+=f'{i} = "{value[-1]}" and ' if len(value) == 2 else ''
+                    if 'Top_Record' in value or 'Bottom_Record' in value :
+                        Filter+=f'{i} = "{value[-2]}-{value[-1]}" and ' if len(value) == 3 and value[-1] else ''
+                    else:
+                        Filter+=f'{i} = "{value[-1]}" and ' if len(value) == 2 and value[-1] else ''
 
         ColumnName = ColumnName[:-1]
 
@@ -54,10 +58,16 @@ def dashboard(requests):
                 Title[i] = i.upper()
 
         Filter = f" where {Filter[:-5]}" if Filter else ''
+        print("Filter",Filter)
         selectquery = open(f"{os.getcwd()}/static/files/selectquery.txt",'r').read()
-        print(selectquery.replace('columns',ColumnName)+ Filter + " ORDER by " + order_by )
-        selectdata = cursor.execute(selectquery.replace('columns',ColumnName)+ Filter + " ORDER by " + order_by).fetchall()
+        print(selectquery.replace('columns',ColumnName)+ Filter )#+ " ORDER by " + order_by )
+        selectdata = cursor.execute(selectquery.replace('columns',ColumnName)+ Filter).fetchall()
         context = {"ColumnName":ColumnName.split(','),'selectdata':selectdata,'Title':Title}
+        
+        # print(ColumnName)
+
+        # df = pd.DataFrame(context)
+        # df.to_csv('f"{os.getcwd()}/static/files/')
 
         return render(requests, 'naccapp/result-page.html', context)
     return render(requests, 'naccapp/dash-board.html', context)
