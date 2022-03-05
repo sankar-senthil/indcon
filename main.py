@@ -59,9 +59,9 @@ class Scrapper:
                 # print(wday, fdate, top, tr, trd, rdd, tsteak, sd, tlw, w8dd, w8c)
 
                 # if tPGm >= 15 and bPGm >= 15:
-                con = sq.connect("basketball.db")
+                con = sq.connect(r"C:\Users\Sankar Senthil\Documents\Daemon\ICONT\InCont\basketball.db")
                 cursor = con.cursor()
-
+                
                 cursor.execute(
                     """
                     insert into S21_22(
@@ -94,13 +94,13 @@ class Scrapper:
                     )values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)                        """,
                     (wday, fdate, top, tGL, t1, t2, tpts, bottom, BGL, b1, b2, bpts, tr, tlw, blw, br, w8c, rdd,sd ,tsteak, bsteak, w8dd, tPGm,  bPGm, trd,  brd)
                 )
-
+                print("Worked - 1")
                 con.commit()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
                 con.close()
                 print(wday, fdate, top, tGL, t1, t2, tpts, bottom, BGL, b1, b2, bpts, tr, tlw, blw, br, w8c, rdd,sd ,tsteak, bsteak, w8dd, tPGm,  bPGm, trd,  brd)
                 # else:pass
             except Exception:
-                pass
+                print(Exception)
 
     
     def box_score(self, boxscore_url):
@@ -153,7 +153,7 @@ class Scrapper:
                     wl = f"{wins}-{losses}"
                     rd = int(wins)-int(losses)
                 except Exception as e:
-                    pass
+                    print(e     )
             # wl = wl[::-1][:8]
             PGm = len(wldet)
             Gsteak = Gsteak[::-1][:8]
@@ -162,8 +162,8 @@ class Scrapper:
 
 if __name__ == "__main__":
     
-    start_date = date(2022, 2, 7) 
-    end_date = date(2022, 2, 13)    
+    start_date = date(2022, 2, 11) 
+    end_date = date(2022, 3, 6)    
     delta = end_date - start_date   
     scrap = Scrapper()
     for i in range(delta.days + 1):

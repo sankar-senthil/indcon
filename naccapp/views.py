@@ -1,4 +1,4 @@
-import sqlite3 as sq, os, pandas as pd
+import sqlite3 as sq, os
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -34,6 +34,7 @@ def dashboard(requests):
             except:pass
             if i == 'Record':
                 order_by = 'Top_Record' if value[0] == 'Top_Record' else 'Bottom_Record'
+                order_by = "Cast(substr(@, 0,instr(@, '-'))AS DECIMAL), Cast(substr(@, 3,instr(@, '-')) AS DECIMAL)".replace('@',order_by)
             else:
                 if len(value) and i != 'csrfmiddlewaretoken':
                     ColumnName+= f'{i},' 
@@ -41,9 +42,26 @@ def dashboard(requests):
                     value[-1] = value[-1].lower() if type(value[-1]) == str and i!='Date' else value[-1]
                     value[-1] = value[-1].capitalize() if i=='Day' else value[-1]
 
-                    print(value[-1])
+                    print(value)
                     if 'Top_Record' in value or 'Bottom_Record' in value :
-                        Filter+=f'{i} = "{value[-2]}-{value[-1]}" and ' if len(value) == 3 and value[-1] else ''
+
+                        if len(value) == 3 and value[-1]:
+                            Filter+=f'{i} = "{value[-2]}-{value[-1]}" and '
+                        else:
+                            
+                            if len(value) == 2:
+                                Filter+=f"substr({i}, 0, instr({i}, '-')) = '{value[-1]}' and "
+                            else:
+                                # Filter+=f"substr({i}, instr({i}, '-')+1) = '{}' and "
+                            # else:
+                            #     Filter+=''
+
+                                pass
+
+                        # Filter+=f'{i} = "{value[-2]}-{value[-1]}" and ' if len(value) == 3 and value[-1] else ''
+
+
+
                     else:
                         Filter+=f'{i} = "{value[-1]}" and ' if len(value) == 2 and value[-1] else ''
 
@@ -60,8 +78,8 @@ def dashboard(requests):
         Filter = f" where {Filter[:-5]}" if Filter else ''
         print("Filter",Filter)
         selectquery = open(f"{os.getcwd()}/static/files/selectquery.txt",'r').read()
-        print(selectquery.replace('columns',ColumnName)+ Filter )#+ " ORDER by " + order_by )
-        selectdata = cursor.execute(selectquery.replace('columns',ColumnName)+ Filter).fetchall()
+        print(selectquery.replace('columns',ColumnName)+ Filter + " order by Cast(date AS Date) DESC;" )
+        selectdata = cursor.execute(selectquery.replace('columns',ColumnName) + Filter + " order by substr(date,7)||substr(date,1,2)||substr(date,4,2) DESC;").fetchall()
         context = {"ColumnName":ColumnName.split(','),'selectdata':selectdata,'Title':Title}
         
         # print(ColumnName)
