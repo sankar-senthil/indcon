@@ -1,8 +1,11 @@
 .container{
     margin-top: 1%;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    border: 2px solid black; 
+    height: 30px; */
 }
-#check-box-row{
+#check-box-row{ 
 
 margin-left: 5%;
 /* margin-right: 20%; */
@@ -17,6 +20,7 @@ td{
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     width: 10%;
     font-size: 70%;
+    padding: 5%;
     
 }
 .order_by{

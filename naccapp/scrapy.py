@@ -17,7 +17,7 @@ def scraper_func():
             print(today)
             print(cttime)
             try:
-                con = sq.connect(r"C:\Users\Sankar Senthil\Documents\Daemon\DB_conv\basketball.db")
+                con = sq.connect(r"C:\Users\Sankar Senthil\Documents\Daemon\DB_conv\new column\basketball.db")
                 cursor = con.cursor()
                 try:
                     cursor.execute("delete from s21_22 where top_boxscore_1 = ''")
@@ -30,7 +30,7 @@ def scraper_func():
                 D = [int(i) for i in st_Date]
 
                 start_date = date(D[-1]+2000, D[1], D[0]) 
-                end_date = datetime.now() + timedelta(days=2)   
+                end_date =  datetime.now().date() + timedelta(days=2) 
                 delta = end_date - start_date   
                 scrap = se.Scrapper()
                 for i in range(delta.days + 1):

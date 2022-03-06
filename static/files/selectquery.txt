@@ -1,5 +1,5 @@
 
-SELECT columns
+SELECT distinct columns
 
 FROM   (
        SELECT *

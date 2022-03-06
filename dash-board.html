@@ -1,0 +1,99 @@
+{% extends 'main.html' %}
+{% load static %}   
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles\dash-board.css' %}">
+<center><h3 class="display-4" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">MENU</h3></center>
+<div class="container">
+    <div class="jumbotron">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table class="table" id="check-box-row">
+                <tbody>
+                {% for i in names %} 
+                    <tr>
+                        {% for j in i %}
+                        {% if j == 'Top_Record' or j == 'Bottom_Record' %}
+                        <td data-toggle="tooltip" data-placement="down" title="{{ j }}">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value='{{ j }}' name='{{ j }}' checked >
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{ j }}
+                                </label>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col" >
+                                            <input type="input" class="form-control" name="{{ j }}" placeholder="Filter">
+                                        </div>
+                                        <div class="col-0.2" >
+                                            <br>
+                                            <h6>-</h6>
+                                        </div>
+                                        <div class="col" >
+                                            <input type="input" class="form-control" name="{{ j }}" placeholder="Filter">
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                        </td>
+
+                        {% else %}
+                            
+                            <td data-toggle="tooltip" data-placement="down" title="{{ j }}">
+                                <div class="form-check">
+                                    {% if 'WIN$_Last' in j %}
+                                        <input class="form-check-input" type="checkbox" value='{{ j }}' name='{{ j }}'>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" value='{{ j }}' name='{{ j }}' checked >
+                                    {% endif %}
+                                    
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ j }}
+                                    </label>
+                                    {% if j == 'Top_Streak' or j == 'Bottom_Streak' or j == 'Streak_Differential'%}
+                                    <br>
+                                        <select  name='{{ j }}' style="width: 70%;height: 30px;">
+                                            <option class="dropdown-item" value=''>...</option>
+                                            <option class="dropdown-item" value=0>Zero</option>
+                                            <option class="dropdown-item" value=1>Positive</option>
+                                            <option class="dropdown-item" value=-1>Negative</option>
+                                          </select>
+                                    {% elif 'WIN$_Last' in j %}
+                                        <div class="form-group">
+                                            <input type="input" class="form-control" name="{{ j }}" placeholder="Filter">
+                                        </div>
+                                    {% else %}
+                                        <div class="form-group">
+                                            <input type="input" class="form-control" name="{{ j }}" placeholder="Filter">
+                                        </div>
+                                    {% endif %}
+                                  </div>
+                            </td>
+                        {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <!-- <div class="order_by">
+                <h4>Order By</h4>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Record" id="flexRadioDefault1" value = 'Top'>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Top Record
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Record" id="flexRadioDefault2" checked value = 'Bottom'>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Bottom record
+                    </label>
+                  </div>
+
+            </div> -->
+            <button type="submit" class="btn btn-primary btn-lg" style="margin-left: 45%;margin-top: 3%;">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
