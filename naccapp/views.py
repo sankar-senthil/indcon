@@ -86,8 +86,8 @@ def dashboard(requests):
     except:pass
     order_by = 'twins,twins'
     names = [box_1[i:i+4] for i in range(0, len(box_1), 4)]
-    box_3 = [box_3[i:i+4] for i in range(0, len(box_3), 4)]
-    context = {'names':names,'box_2':box_2,'box_3':box_3,"box":box}
+    box_4t = [box_3[i:i+4] for i in range(0, len(box_3), 4)]
+    context = {'names':names,'box_2':box_2,'box_4t':box_4t,"box":box}
     if requests.method == 'POST':
         Ddata = dict(requests.POST)
         for i in Ddata:
@@ -99,13 +99,21 @@ def dashboard(requests):
                 order_by = 'Top_Record' if value[0] == 'Top_Record' else 'Bottom_Record'
                 order_by = "Cast(substr(@, 0,instr(@, '-'))AS DECIMAL), Cast(substr(@, 3,instr(@, '-')) AS DECIMAL)".replace('@',order_by)
             else:
-                if len(value) and i != 'csrfmiddlewaretoken':
-                    ColumnName+= f'{i},' 
+                if len(value) and i != 'csrfmiddlewaretoken' and i in value:
+                    if i in box_3:
+                        if value[-1]=='-1':
+                            ColumnName+= f"({i} - {i.split('_')[-2]})"
+                        else:
+                            ColumnName+= f'{i},' 
+                    else:
+                        ColumnName+= f'{i},' 
 
                     value[-1] = value[-1].lower() if type(value[-1]) == str and i!='Date' else value[-1]
                     value[-1] = value[-1].capitalize() if i=='Day' else value[-1]
+                    print(i)
+                    print(box_3)
+                    print(i in box_3)
 
-                    print(value)
                     if 'Top_Record' in value or 'Bottom_Record' in value :
 
                         if len(value) == 3 and value[-1]:
@@ -129,6 +137,17 @@ def dashboard(requests):
                                 Filter += f'Cast({i} AS Decimal) = 0 and '
                         except:
                             Filter += ''
+
+                    elif i in box_3:
+                        print("worked")
+                        if value[-1]:
+                            if value[-1] == "1":
+                                Filter += f'{i}> 0 and '
+                            elif value[-1] == '-1':
+                                Filter += f"({i} - {i.split('_')[-2]}) < 0 and "
+                            else:
+                                Filter += f"{i} = 0 and "
+                        else:pass
                             
                     else:
                         Filter+=f'{i} = "{value[-1]}" and ' if len(value) == 2 and value[-1] else ''

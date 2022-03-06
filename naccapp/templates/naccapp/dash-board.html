@@ -64,7 +64,7 @@
             </table><br>
         <center><h3>Last Wins</h3></center>
             <table class="table" id="check-box-row">
-                {% for i in box_3 %}
+                {% for i in box_4t %}
                     {% if 'Top' in i.0%} 
                     <thead><th></th></thead>
                     {% endif %}
@@ -84,6 +84,15 @@
                                             {{ j }}
                                         </label>
                                         
+                                        
+                                        <br>
+                                        <select  name='{{ j }}' style="width: 70%;height: 30px;">
+                                            <option class="dropdown-item" value=''>...</option>
+                                            <option class="dropdown-item" value=0>Zero</option>
+                                            <option class="dropdown-item" value=1>Positive</option>
+                                            <option class="dropdown-item" value=-1>Negative</option>
+                                        </select>
+                                        <br>
                                         <input type="input" class="form-control" name="{{ j }}" placeholder="Filter">
                                         
                                 </td>
