@@ -18,11 +18,13 @@ class Scrapper:
  
     def main_page(self, m, d, y):
         self.strdate = f"{y}-{m}-{d}"
+        print(self.main_url % (int(m), int(d), y))
         response = requests.get(self.main_url % (int(m), int(d), y),headers = self.headers)
         soup = bs4.BeautifulSoup(response.content, 'html.parser')
         game_summaries = soup.findAll('div',{'class':'game_summary nohover'})
 
         for gsrow in game_summaries:
+            # print(gsrow)
             try:
                 teams = gsrow.find('table',{"class":"teams"})
                 top, bottom = teams.findAll('a')[0].get('href').split('/')[3], teams.findAll('a')[-1].get('href').split('/')[3]
@@ -158,7 +160,7 @@ class Scrapper:
                 con.commit()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
                 con.close()
                 print(self.wday, fdate, top, tGL, t1, t2, tpts, bottom, BGL, b1, b2, bpts, tr, t8w, b8w, br, w8c, rdd,sd ,tsteak, bsteak, w8dd, tPGm,  bPGm, trd,  brd)
-                # else:pass
+            # else:pass
             except Exception:
                 pass
 
@@ -213,19 +215,19 @@ class Scrapper:
                     wl = f"{wins}-{losses}"
                     rd = int(wins)-int(losses)
                 except Exception as e:
-                    print(e     )
+                    # print(e     )
+                    pass
             # wl = wl[::-1][:8]
             PGm = len(wldet)
             Gsteak = Gsteak[::-1][:8]
             wldet = wldet[::-1]
+
             return (wl, rd, Gsteak, wldet, pts, PGm, game_location)
 
 if __name__ == "__main__":
     
-    # start_date = date(2021, 11, 9) 
-    # end_date =  datetime.now().date() + timedelta(days=2)   
-    start_date = date(2022, 3, 5) 
-    end_date =  datetime.now().date() + timedelta(days=2)
+    start_date = date(2022, 3, 1) 
+    end_date =  datetime.now().date() + timedelta(days=2)   
     delta = end_date - start_date   
     scrap = Scrapper()
     for i in range(delta.days + 1):

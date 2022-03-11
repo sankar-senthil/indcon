@@ -7,7 +7,7 @@ box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2
     <thead class="thead-dark">
       <tr>
         <th scope="col">line_number</th>
-        {% for th in  ColumnName %}
+        {% for th in  Title %}
             <th scope="col" data-toggle="tooltip" data-placement="down" title="{{ th }}" >{{ th }}</th>
         {% endfor %}
         
@@ -29,4 +29,5 @@ box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2
     {% endif %}
   </table></center>
 </div>
+
 {% endblock content %}
