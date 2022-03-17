@@ -224,17 +224,17 @@ class Scrapper:
 
             return (wl, rd, Gsteak, wldet, pts, PGm, game_location)
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     
-    start_date = date(2022, 3, 1) 
-    end_date =  datetime.now().date() + timedelta(days=2)   
-    delta = end_date - start_date   
-    scrap = Scrapper()
-    for i in range(delta.days + 1):
-        day = start_date + timedelta(days=i)
-        scrap.wday = calendar.day_name[day.weekday()][:3]
-        scrap.day = str(day)
-        y, m, d = scrap.day.split('-')
-        scrap.main_page(m, d, y)
-        print(day)
-        print("*"*150)
+    # start_date = date(2022, 3, 14) 
+    # end_date =  datetime.now().date() + timedelta(days=2)   
+    # delta = end_date - start_date   
+    # scrap = Scrapper()
+    # for i in range(delta.days + 1):
+    #     day = start_date + timedelta(days=i)
+    #     scrap.wday = calendar.day_name[day.weekday()][:3]
+    #     scrap.day = str(day)
+    #     y, m, d = scrap.day.split('-')
+    #     scrap.main_page(m, d, y)
+    #     print(day)
+    #     print("*"*150)

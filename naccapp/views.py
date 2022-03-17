@@ -116,28 +116,28 @@ def dashboard(requests):
                     order_by = 'Top_Record' if value[0] == 'Top_Record' else 'Bottom_Record'
                     order_by = "Cast(substr(@, 0,instr(@, '-'))AS DECIMAL), Cast(substr(@, 3,instr(@, '-')) AS DECIMAL)".replace('@',order_by)
                 else:
-                    #print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',col)
-                    #print(box)
                     if len(value) and i != 'csrfmiddlewaretoken' and i in value or col == value[0]:
                         if i in box_3:
-                            #print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB')
                             if value[-1]=='-1':
                                 ColumnName+= f"({i} - {i.split('_')[-2]})"
                             else:
                                 ColumnName+= f'{i},' 
 
+                            #### Last Win$ Differential Block
+                            cnt = int(i.split('_')[-2])
+                            if cnt>1 and cnt<8:
+                                ColumnName += f"cast({i.replace(str(cnt),str(cnt+1))} - cast({i} as Decimal) as Decimal) as {'_'.join(i.split('_')[:2])}_Differential_{str(cnt)}_{str(cnt+1)}_games, "
+                            else:pass
+
+
                         elif col in box:
-                            #print("dsfhgjsdhhsdbfshj")
                             ColumnName+= f'{i} as {col},' 
                         else:
-                            #print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
                             ColumnName+= f'{i},' 
+
 
                         value[-1] = value[-1].lower() if type(value[-1]) == str and i!='Date' else value[-1]
                         value[-1] = value[-1].capitalize() if i=='Day' else value[-1]
-                        # #print(i)
-                        # #print(box_3)
-                        # #print(i in box_3)
 
                         if 'Top_Record' in value or 'Bottom_Record' in value :
 
@@ -152,8 +152,6 @@ def dashboard(requests):
                                     pass
 
                         elif i not in box :
-                            #print("worked")
-                            print("valuevaluevaluevaluevalue",value)
                             if len(value) == 3:
                                 if value[-2] == "p":
                                     Filter += f'{i}> 0 and '
@@ -187,7 +185,7 @@ def dashboard(requests):
         Filter = f" where {Filter[:-5]}" if Filter else ''
         #print("Filter",Filter)
         selectquery = open(r"C:\Users\Sankar Senthil\Documents\Daemon\ICONT\InCont\static\files\selectquery.txt",'r').read()
-        print(selectquery.replace('columns',ColumnName) + Filter + " order by substr(date,7)||substr(date,1,2)||substr(date,4,2) DESC;" )
+        print(selectquery.replace('columns',ColumnName) + Filter + " order by substr(date,7)||substr(date,1,2)||substr(date,4,2) DESC;")
         selectdata = cursor.execute(selectquery.replace('columns',ColumnName) + Filter + " order by substr(date,7)||substr(date,1,2)||substr(date,4,2) DESC;").fetchall()
 
         context = {"ColumnName":ColumnName.split(','),'selectdata':selectdata,'Title':Title}

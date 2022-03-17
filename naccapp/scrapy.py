@@ -47,7 +47,7 @@ def scraper_func():
             con.commit()
             con.close()
             time.sleep(10800)
-            break
+            
 
 scraper_func()
         
